@@ -1,4 +1,4 @@
 hellyer-kiwi-nginx
 ==================
 
-The Nginx configuration for the hellyer.kiwi server
+This is the Nginx configuration for the hellyer.kiwi server.
