@@ -1,0 +1,28 @@
+##X
+# Configuration for *.hellyer.kiwi domain
+##
+server {
+listen         80;
+server_name *.hellyer.kiwi hellyer.kiwi;
+return 301 https://$host$request_uri;
+#       return         301 https://$server_name$request_uri;
+}
+
+server {
+        server_name *.hellyer.kiwi hellyer.kiwi;
+        include /etc/nginx/nginx-config-repo/ssl.conf;
+
+	rewrite /files/(.+)$ /wp-content/blogs.dir/$blogid/files/$1 last;
+        include /etc/nginx/nginx-config-repo/wordpress.conf;
+}
+
+##
+# Configuration for wordpress.hellyer.kiwi domain
+##
+server {
+	server_name wordpress.hellyer.kiwi;
+	include /etc/nginx/nginx-config-repo/ssl.conf;
+	rewrite ^.*/files/(.*)$ /wp-includes/ms-files.php?file=$1 last;
+	include /etc/nginx/nginx-config-repo/wordpress.conf;
+}
+
